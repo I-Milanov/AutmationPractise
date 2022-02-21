@@ -1,0 +1,12 @@
+Make functional web tests using WebDriver. The tests should navigate to the following URL: http://automationpractice.com/index.php?id_category=8&controller=category
+a. Organize the test logic in page objects.
+b. Add a method for adding and comparing items.
+c. Add methods for verification of the information on the comparison screen
+d. Pass the verification info through a DTO class.
+e. Add tests for navigation to Quick View and verification of the info there.
+f. Add tests to change the quantity, size, color from a quick view, and add the item to the cart. Then, verify that the correct item was added.
+
+Dresses - My Store
+automationpractice.com • 1 min read
+доразшири после задачата и като организираш максимално кода с page objects и други техники, които знаеш,
+за да се избягва дублиране

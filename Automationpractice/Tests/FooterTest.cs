@@ -1,6 +1,8 @@
 ﻿using Automationpractice.Pages;
 using Automationpractice.Tests;
 using NUnit.Framework;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
 
 namespace Automationpractice
 
@@ -14,6 +16,7 @@ namespace Automationpractice
         public void Setup()
         {
             Initialize();
+   
             Driver.Navigate().GoToUrl("http://automationpractice.com");
             _basePage = new BasePage(Driver);
         }
@@ -21,13 +24,17 @@ namespace Automationpractice
 
         [Test]
         public void AssertFacebookLink()
-        {
-            _basePage.ScrollTo(_basePage.FollowUsFacebook).Click();
-            Driver.SwitchTo().ActiveElement();
-            Assert.AreEqual("https://www.facebook.com/groups/525066904174158/",_basePage.Driver.Url.ToString());
+        {//To Do
+            //string actualResult;
+            
+            //_basePage.ScrollTo(_basePage.FollowUsFacebook).Click();
+            //Driver.SwitchTo().ActiveElement();
+            //actualResult = Driver.Title;
+
+            //Assert.AreEqual("Selenium Framework | Facebook", actualResult);
         }
 
-
+        //To Do
 
 
 

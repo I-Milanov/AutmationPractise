@@ -14,9 +14,12 @@ namespace Automationpractice.Tests
 
         protected Actions Builder { get; set; }
 
+
+
         public void Initialize()
         {
             Driver = new ChromeDriver(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
+            Driver.Manage().Window.Maximize();
             Builder = new Actions(Driver);
         }
     }

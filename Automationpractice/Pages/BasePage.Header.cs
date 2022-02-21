@@ -26,5 +26,11 @@ namespace Automationpractice.Pages
         public IWebElement NavDresses => Driver.FindElement(By.CssSelector("#block_top_menu>ul>li:nth-child(2)"));
         public IWebElement NavTshirts => Driver.FindElement(By.CssSelector("#block_top_menu>ul>li:nth-child(3)"));
 
+        public IWebElement CartQuantity => Driver.FindElement(By.CssSelector(".shopping_cart>a>span"));
+        
+
+
+        //To Do Take elements when hover 
+
     }
 }

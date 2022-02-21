@@ -6,20 +6,8 @@ using System.Linq;
 
 namespace Automationpractice.Pages.ProductsPage
 {
-    public class ProductsPage : BasePage
+    public partial class ProductsPage : BasePage
     {
-
-
-        public ProductsPage(IWebDriver driver) : base(driver)
-        {
-        }
-
-
-        public IWebElement SortBy => Driver.FindElement(By.Id("selectProductSort"));
-
-
-
-
         public float[] TakeEveryProductsPrices()
         {
             var prices = Driver.FindElements(By.CssSelector(".product_list  .right-block .price"));
@@ -70,8 +58,6 @@ namespace Automationpractice.Pages.ProductsPage
             closebutton.Click();
         }
 
-
-
         private void HoverOverAnElement(IWebElement element)
         {
             Actions action = new Actions(Driver);
@@ -79,6 +65,20 @@ namespace Automationpractice.Pages.ProductsPage
 
         }
 
+        public void AddToCompareTwoProducts(int firstProductNum, int secontProductNum)
+        {
+            AddToCompare(firstProductNum);
+            AddToCompare(secontProductNum);
+        }
+
+        public void AddToCompare(int itemNumber)
+        {
+            string pathString = $".product_list>li:nth-child({itemNumber})";
+            var productToHover = Driver.FindElement(By.CssSelector(pathString));
+            HoverOverAnElement(productToHover);
+            var addToCompareButton = Driver.FindElement(By.CssSelector($"{pathString} .add_to_compare"));
+            addToCompareButton.Click();
+        }
 
     }
 }

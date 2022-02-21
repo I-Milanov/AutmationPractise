@@ -18,7 +18,7 @@ namespace Automationpractice
         }
 
         [Test]
-        public void AssertWomenNavigatorLink()
+        public void WomenNavigatorLink()
         {
             _basePage.NavWomen.Click();
 
@@ -26,7 +26,7 @@ namespace Automationpractice
         }
 
         [Test]
-        public void AssertDressesNavigatorLink()
+        public void DressesNavigatorLink()
         {
             _basePage.NavDresses.Click();
 
@@ -34,7 +34,7 @@ namespace Automationpractice
         }
 
         [Test]
-        public void AssertTshirtNavigatorLink()
+        public void TshirtNavigatorLink()
         {
             _basePage.NavTshirts.Click();
 
@@ -42,7 +42,7 @@ namespace Automationpractice
         }
 
         [Test]
-        public void AssertContactUsHeaderLink()
+        public void ContactUsHeaderLink()
         {
             _basePage.ContactUsLink.Click();
 
@@ -50,9 +50,9 @@ namespace Automationpractice
         }
 
         [Test]
-        public void AssertLogoLink()
+        public void LogoLink()
         {
-            AssertContactUsHeaderLink();
+            ContactUsHeaderLink();
             _basePage.Logo.Click();
 
             Assert.AreEqual("My Store", _basePage.Driver.Title);

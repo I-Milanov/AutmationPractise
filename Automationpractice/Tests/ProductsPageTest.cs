@@ -1,11 +1,5 @@
-﻿using Automationpractice.Pages;
-using Automationpractice.Pages.ProductsPage;
+﻿using Automationpractice.Pages.ProductsPage;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Automationpractice.Tests
 {
@@ -25,7 +19,7 @@ namespace Automationpractice.Tests
 
 
         [Test]
-        public void AssertSortByPriceHighestFirst()
+        public void SortByPriceHighestFirst()
         {
             _productPage.SortBy.SendKeys("Price: Highest first");
             _productPage.WaitForLoad();
@@ -34,13 +28,22 @@ namespace Automationpractice.Tests
         }
 
         [Test]
-        public void AssertAddProductToCart()
+        public void AddProductToCart()
         {            
             _productPage.AddToCart(2);
             
             string actualResult = _productPage.CartQuantity.Text;
             Assert.AreEqual("1", actualResult);
         }
+
+        [Test]
+        public void AddToCompare()
+        {
+            _productPage.AddToCompare(1);
+
+            Assert.AreEqual("1", _productPage.CompareItemsNumber.Text);
+        }
+
 
 
 

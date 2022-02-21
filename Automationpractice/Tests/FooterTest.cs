@@ -23,7 +23,7 @@ namespace Automationpractice
 
 
         [Test]
-        public void AssertFacebookLink()
+        public void FacebookLink()
         {//To Do
             //string actualResult;
             

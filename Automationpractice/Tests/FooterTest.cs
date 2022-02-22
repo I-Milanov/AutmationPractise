@@ -1,8 +1,6 @@
 ﻿using Automationpractice.Pages;
 using Automationpractice.Tests;
 using NUnit.Framework;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
 
 namespace Automationpractice
 

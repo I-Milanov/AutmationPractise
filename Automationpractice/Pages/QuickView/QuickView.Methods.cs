@@ -1,13 +1,8 @@
 ﻿using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Automationpractice.Pages.Quick__View
+namespace Automationpractice.Pages.QuickView
 {
-    public partial class QuickView : BasePage
+    public partial class QuickView : ProductsPage.ProductsPage
     {
         public void FillTheData(int quant, char size, int colorNumber)
         {
@@ -19,9 +14,15 @@ namespace Automationpractice.Pages.Quick__View
         public IWebElement SelectColor(int colorNumber)
         {
 
-            IWebElement color = Driver.FindElement(By.CssSelector
-    ("# product .color_pick:nth-child({colorNumber}"));
+            IWebElement color = Driver.FindElement(By.CssSelector($"#product .color_pick:nth-child({colorNumber})"));
             return color;
+        }
+
+
+
+        public bool IsQuickViewOpen()
+        {
+            return Driver.FindElement(By.Id("product")).Displayed;
         }
 
     }

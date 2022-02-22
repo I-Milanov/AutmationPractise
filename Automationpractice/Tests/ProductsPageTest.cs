@@ -5,7 +5,7 @@ namespace Automationpractice.Tests
 {
     [TestFixture]
     public class ProductsPageTest : BaseTest
-    {  
+    {
 
         private ProductsPage _productPage;
 
@@ -28,9 +28,9 @@ namespace Automationpractice.Tests
 
         [Test]
         public void AddProductToCart()
-        {            
+        {
             _productPage.AddToCart(2);
-            
+
             string actualResult = _productPage.CartQuantity.Text;
             Assert.AreEqual("1", actualResult);
         }
@@ -44,7 +44,13 @@ namespace Automationpractice.Tests
         }
 
 
-
+        [Test]
+        [TestCase(1)]
+        public void NavigateToQickView(int productNumber)
+        {
+            _productPage.OpenProductQuickView(productNumber);
+            Assert.That(_productPage.IsQuickViewOpen);
+        }
 
         [TearDown]
         public void TearDown()
@@ -54,4 +60,5 @@ namespace Automationpractice.Tests
 
     }
 }
+
 

@@ -1,17 +1,14 @@
 ﻿using OpenQA.Selenium;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Automationpractice.Pages.Quick__View
+namespace Automationpractice.Pages.QuickView
 {
-    public partial class QuickView:BasePage
+    public partial class QuickView : ProductsPage.ProductsPage
     {
         public QuickView(IWebDriver driver) : base(driver)
         {
         }
+    
         public IWebElement TweeterButton => Driver.FindElement(By.CssSelector(".btn-twitter"));
         public IWebElement FacebookButton => Driver.FindElement(By.CssSelector(".btn-facebook"));
         public IWebElement GoogleButton => Driver.FindElement(By.CssSelector(".btn-google-plus"));
@@ -19,7 +16,7 @@ namespace Automationpractice.Pages.Quick__View
 
         public IWebElement ProductName => Driver.FindElement(By.XPath("//*[@id='product']//h1[@itemprop='name']"));
         public IWebElement ProductReference => Driver.FindElement(By.XPath("//*[@id='product']//*[@id='product_reference']"));
-
+        public IWebElement ProductPrice => Driver.FindElement(By.CssSelector("#our_price_display")); 
         public IWebElement QuantityField => Driver.FindElement(By.XPath("//*[@id='product']//*[@id='quantity_wanted']"));
 
         public IWebElement QuantityMinusButton => Driver.FindElement(By.CssSelector("#product .button-minus"));

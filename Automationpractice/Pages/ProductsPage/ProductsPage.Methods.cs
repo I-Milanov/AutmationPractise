@@ -1,8 +1,6 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 
 namespace Automationpractice.Pages.ProductsPage
 {
@@ -10,7 +8,7 @@ namespace Automationpractice.Pages.ProductsPage
     {
         public float[] TakeEveryProductsPrices()
         {
-            var prices = Driver.FindElements(By.CssSelector(".product_list  .right-block .price"));
+            var prices = Driver.FindElements(By.CssSelector(".product_list .right-block .price"));
             float[] pricesfloat = new float[prices.Count];
             CultureInfo ci = (CultureInfo)CultureInfo.CurrentCulture.Clone();
             ci.NumberFormat.CurrencyDecimalSeparator = ".";
@@ -57,7 +55,7 @@ namespace Automationpractice.Pages.ProductsPage
             closebutton.Click();
         }
 
-        private void HoverOverAnElement(IWebElement element)
+        public void HoverOverAnElement(IWebElement element)
         {
             Actions action = new Actions(Driver);
             action.MoveToElement(element).Perform();
@@ -73,10 +71,62 @@ namespace Automationpractice.Pages.ProductsPage
         public void AddToCompare(int itemNumber)
         {
             string pathString = $".product_list>li:nth-child({itemNumber})";
-            var productToHover = Driver.FindElement(By.CssSelector(pathString));
-            HoverOverAnElement(productToHover);
+            HoverOverAnElement(SelectProduct(itemNumber));
             var addToCompareButton = Driver.FindElement(By.CssSelector($"{pathString} .add_to_compare"));
             addToCompareButton.Click();
+        }
+
+        public IWebElement SelectProduct(int itemNumber)
+        {
+            string pathString = $".product_list>li:nth-child({itemNumber})";
+            var selectedProduct = Driver.FindElement(By.CssSelector(pathString));
+            return selectedProduct;
+        }
+
+        public void OpenProductQuickView(int procutNumber)
+        {
+            IWebElement selectedProduct = SelectProduct(procutNumber);
+            HoverOverAnElement(selectedProduct);
+            selectedProduct.FindElement(By.CssSelector(".left-block")).Click();
+            Driver.SwitchTo().Frame(Driver.FindElement(By.CssSelector(".fancybox-inner>iframe")));
+        }
+
+        public bool IsQuickViewOpen()
+        {
+            bool isTrue = Driver.FindElement(By.CssSelector("#product")).Enabled;
+            return isTrue;
+        }
+
+        public string TakeProductPriceAsString(int productNum)
+        {
+            string price = Driver.FindElement(By.CssSelector($".product_list>li:nth-child({productNum}) .right-block .content_price span")).Text;
+            return price;
+        }
+
+        public string TakeNameAsString(int productNum)
+        {
+            string name = Driver.FindElement(By.CssSelector($".product_list>li:nth-child({productNum}) .right-block .product-name")).Text;
+            return name;
+        }
+        public bool ComparsionScreenVerification(int[] arrayOfProducts)
+        {
+            int counter = arrayOfProducts.Length;
+            string[] namesFromProductsPage = new string[arrayOfProducts.Length];
+            string[] priceFromProductsPage = new string[arrayOfProducts.Length];
+            for (int i = 0; i < arrayOfProducts.Length; i++)
+            {
+                namesFromProductsPage[i] = TakeNameAsString(arrayOfProducts[i]);
+                priceFromProductsPage[i] = TakeProductPriceAsString(arrayOfProducts[i]);
+                AddToCompare(arrayOfProducts[i]);
+            }
+            CompareButtonTop.Click();
+
+
+
+           if(counter == 0)
+            { return true; }
+            else 
+            { return false; }
         }
 
     }

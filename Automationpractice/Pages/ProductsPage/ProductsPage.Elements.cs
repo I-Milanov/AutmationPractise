@@ -1,8 +1,4 @@
 ﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Interactions;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
 
 namespace Automationpractice.Pages.ProductsPage
 {
@@ -14,12 +10,11 @@ namespace Automationpractice.Pages.ProductsPage
         {
         }
 
-
         public IWebElement SortBy => Driver.FindElement(By.Id("selectProductSort"));
 
-        public IWebElement CompareItemsNumber => Driver.FindElement(By.Id("selectProductSort"));
+        public IWebElement CompareItemsNumber => Driver.FindElement(By.CssSelector(".total-compare-val"));
 
-
+        public IWebElement CompareButtonTop => Driver.FindElement(By.CssSelector(".top-pagination-content .bt_compare"));
 
     }
 }

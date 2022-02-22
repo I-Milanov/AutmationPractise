@@ -22,7 +22,6 @@ namespace Automationpractice.Tests
         public void SortByPriceHighestFirst()
         {
             _productPage.SortBy.SendKeys("Price: Highest first");
-            _productPage.WaitForLoad();
             Assert.IsTrue(_productPage.IsHighToLow(_productPage.TakeEveryProductsPrices()));
 
         }

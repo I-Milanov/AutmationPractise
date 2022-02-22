@@ -20,12 +20,7 @@ namespace Automationpractice.Pages
             ((IJavaScriptExecutor)Driver).ExecuteScript("arguments[0].scrollIntoView(true);", element);
             return element;
         }
-        public void WaitForLoad(int timeoutSec = 15)
-        {
-            IJavaScriptExecutor js = (IJavaScriptExecutor)Driver;
-            WebDriverWait wait = new WebDriverWait(Driver, new TimeSpan(0, 0, timeoutSec));
-            wait.Until(wd => js.ExecuteScript("return document.readyState").ToString() == "complete");
-        }
+       
 
 
     }

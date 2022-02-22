@@ -53,7 +53,6 @@ namespace Automationpractice.Pages.ProductsPage
             HoverOverAnElement(productToHover);
             var addToCartButton = Driver.FindElement(By.CssSelector($".right-block:nth-child({itemNumber}) .button"));
             addToCartButton.Click();
-            WaitForLoad();
             var closebutton = Driver.FindElement(By.CssSelector(".cross"));
             closebutton.Click();
         }

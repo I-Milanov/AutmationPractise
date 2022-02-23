@@ -108,26 +108,7 @@ namespace Automationpractice.Pages.ProductsPage
             string name = Driver.FindElement(By.CssSelector($".product_list>li:nth-child({productNum}) .right-block .product-name")).Text;
             return name;
         }
-        public bool ComparsionScreenVerification(int[] arrayOfProducts)
-        {
-            int counter = arrayOfProducts.Length;
-            string[] namesFromProductsPage = new string[arrayOfProducts.Length];
-            string[] priceFromProductsPage = new string[arrayOfProducts.Length];
-            for (int i = 0; i < arrayOfProducts.Length; i++)
-            {
-                namesFromProductsPage[i] = TakeNameAsString(arrayOfProducts[i]);
-                priceFromProductsPage[i] = TakeProductPriceAsString(arrayOfProducts[i]);
-                AddToCompare(arrayOfProducts[i]);
-            }
-            CompareButtonTop.Click();
 
-
-
-           if(counter == 0)
-            { return true; }
-            else 
-            { return false; }
-        }
 
     }
 }

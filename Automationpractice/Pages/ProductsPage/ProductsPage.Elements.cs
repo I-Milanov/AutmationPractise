@@ -11,9 +11,7 @@ namespace Automationpractice.Pages.ProductsPage
         }
 
         public IWebElement SortBy => Driver.FindElement(By.Id("selectProductSort"));
-
         public IWebElement CompareItemsNumber => Driver.FindElement(By.CssSelector(".total-compare-val"));
-
         public IWebElement CompareButtonTop => Driver.FindElement(By.CssSelector(".top-pagination-content .bt_compare"));
 
     }

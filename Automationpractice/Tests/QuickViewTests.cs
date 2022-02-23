@@ -1,4 +1,4 @@
-﻿using Automationpractice.Pages.ProductPreview;
+﻿using Automationpractice.Models.ProductPreview;
 using Automationpractice.Pages.QuickView;
 using NUnit.Framework;
 

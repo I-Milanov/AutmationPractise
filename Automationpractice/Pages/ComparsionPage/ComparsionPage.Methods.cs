@@ -11,9 +11,7 @@ namespace Automationpractice.Pages.ComparsionPage
         {
 
             int counter = arrayOfProducts.Length;
-
             ProductPreview[] productsFromProdutPage = new ProductPreview[arrayOfProducts.Length];
-
 
             for (int i = 0; i < arrayOfProducts.Length; i++)
             {
@@ -29,6 +27,7 @@ namespace Automationpractice.Pages.ComparsionPage
             {
                 return false;
             }
+
             IReadOnlyCollection<IWebElement> productsToCompare = ProductsToCompare;
             ProductPreview[] productsFromComparePage = new ProductPreview[productsToCompare.Count];
 
@@ -50,18 +49,15 @@ namespace Automationpractice.Pages.ComparsionPage
                         counter--;
                     }
                 }
-
             }
+
+
             return counter == 0 ? true : false;
         }
-
         public bool ComprasionPageProductsCountVerify(int productsThatMustBe)
         {
             return ProductsToCompare.Count == productsThatMustBe ? true : false;
         }
-
-
-
         public string TakeProductNameFromComprassionScreen(int productNumber)
         {
             return Driver.FindElement(By.CssSelector($"#product_comparison .product-block:nth-of-type({productNumber + 2}) .product-name")).Text;

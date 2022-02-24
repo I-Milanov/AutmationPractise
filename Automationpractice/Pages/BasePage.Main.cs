@@ -19,9 +19,6 @@ namespace Automationpractice.Pages
         {
             ((IJavaScriptExecutor)Driver).ExecuteScript("arguments[0].scrollIntoView(true);", element);
             return element;
-        }
-       
-
-
+        }      
     }
 }

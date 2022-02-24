@@ -9,7 +9,6 @@ namespace Automationpractice.Pages.ComparsionPage
         {
 
         }
-
         public IWebElement TweeterButton => Driver.FindElement(By.CssSelector("btn-twitter"));
         public IWebElement FacebookButton => Driver.FindElement(By.CssSelector("btn-twitter"));
         public IWebElement GoogleButton => Driver.FindElement(By.CssSelector("btn-google-plus"));

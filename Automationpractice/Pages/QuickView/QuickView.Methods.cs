@@ -21,5 +21,12 @@ namespace Automationpractice.Pages.QuickView
             return Driver.FindElement(By.Id("product")).Displayed;
         }
 
+        public string SelectColorAndReturnItsName(int colorNumber)
+        {
+            IWebElement colorToSelect = Driver.FindElement(By.CssSelector($"#color_to_pick_list li:nth-of-type({colorNumber}) a"));
+            string colorName = colorToSelect.GetAttribute("name");
+            colorToSelect.Click();
+            return colorName;
+        }
     }
 }

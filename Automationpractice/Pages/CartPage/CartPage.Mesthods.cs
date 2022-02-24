@@ -41,7 +41,18 @@ namespace Automationpractice.Pages.CartPage
         {
             return Driver.FindElement(By.CssSelector($"tbody tr:nth-of-type({productNumber}) .cart_quantity .cart_quantity_input")).GetAttribute("value");
         }
-
+        public string TakeSizeFromProductInCart(int productNumber)
+        {
+            return SeparateColorAndSize(productNumber)[1];
+        }
+        public string TakeColorFromProductInCart(int productNumber)
+        {
+            return SeparateColorAndSize(productNumber)[0];
+        }
+        private string[] SeparateColorAndSize(int productNumber)
+        {
+            return Driver.FindElement(By.CssSelector($"tbody tr:nth-of-type({productNumber}) .cart_description small a")).Text.Replace("Color : ", "").Replace(", Size :", "").Split(' ');
+        }
         public string DeleteProductInCart(int productNumber)
         {
             return Driver.FindElement(By.CssSelector($"tbody tr:nth-of-type({productNumber}) .cart_quantity_delete")).Text;
@@ -56,7 +67,9 @@ namespace Automationpractice.Pages.CartPage
             return Driver.FindElement(By.CssSelector($"tbody tr:nth-of-type({productNumber}) .button-minus")).Text;
         }
 
- 
+
+
+
 
     }
 }

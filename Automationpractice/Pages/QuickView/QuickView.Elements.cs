@@ -26,6 +26,5 @@ namespace Automationpractice.Pages.QuickView
         public IReadOnlyCollection<IWebElement> Colors => Driver.FindElements(By.CssSelector("#product .color_pick"));
 
 
-
     }
 }

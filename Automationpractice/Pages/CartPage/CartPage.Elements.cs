@@ -17,7 +17,7 @@ namespace Automationpractice.Pages.CartPage
         public IWebElement totalProducts => Driver.FindElement(By.Id("summary_products_quantity"));
         public IWebElement ContinueShoppingButton=> Driver.FindElement(By.CssSelector(".cart_navigation .button-exclusive"));
         public IWebElement ProceeedToCheckOutButton => Driver.FindElement(By.CssSelector(".cart_navigation .standard-checkout"));
-
+        
 
 
     }

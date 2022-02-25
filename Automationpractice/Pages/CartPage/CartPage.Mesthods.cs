@@ -67,9 +67,5 @@ namespace Automationpractice.Pages.CartPage
             return Driver.FindElement(By.CssSelector($"tbody tr:nth-of-type({productNumber}) .button-minus")).Text;
         }
 
-
-
-
-
     }
 }

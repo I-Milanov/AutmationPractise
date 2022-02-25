@@ -24,7 +24,7 @@ namespace Automationpractice.Tests
         //here the idea was to use int[] in TestCase but as i fount nunit can't take it
         [Test]
         [TestCase("2,3,4")]
-        public void ComprasionPageAssert(string productsToCompareString)
+        public void ComprasionPageProductsAssert(string productsToCompareString)
         {
             string[] productsToCompareStringAsString = productsToCompareString.Split(',');
             int[] arrayOfProducts = new int[productsToCompareStringAsString.Length];
@@ -33,7 +33,7 @@ namespace Automationpractice.Tests
                 arrayOfProducts[i] = int.Parse(productsToCompareStringAsString[i]);
             }
 
-            Assert.That(_comparsionPage.ComparsionScreenVerification(arrayOfProducts));
+            _comparsionPage.AssertProductsToCompare(arrayOfProducts);
         }
 
 

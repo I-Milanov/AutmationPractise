@@ -7,7 +7,6 @@ namespace Automationpractice.Pages.QuickView
     {
         public QuickView(IWebDriver driver) : base(driver)
         {
-
         }
 
         public IWebElement TweeterButton => Driver.FindElement(By.CssSelector(".btn-twitter"));
@@ -21,10 +20,11 @@ namespace Automationpractice.Pages.QuickView
         public IWebElement QuantityMinusButton => Driver.FindElement(By.CssSelector("#product .button-minus"));
         public IWebElement QuantityPlusButton => Driver.FindElement(By.CssSelector("#product .button-plus"));
         public IWebElement ProductSize => Driver.FindElement(By.CssSelector("#product #group_1"));
+        public IWebElement ProductSizeSelected => Driver.FindElement(By.CssSelector("#product #group_1 [selected^=\"selected\"]"));
         public IWebElement AddToCartQuickView => Driver.FindElement(By.CssSelector("#product .exclusive"));
         public IWebElement AddToWishList => Driver.FindElement(By.CssSelector("#product #wishlist_button"));
         public IReadOnlyCollection<IWebElement> Colors => Driver.FindElements(By.CssSelector("#product .color_pick"));
-
+        public IWebElement SelectedColor => Driver.FindElement(By.CssSelector("#color_to_pick_list li.selected a.selected"));  
 
     }
 }

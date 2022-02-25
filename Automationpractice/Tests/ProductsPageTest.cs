@@ -6,7 +6,6 @@ namespace Automationpractice.Tests
     [TestFixture]
     public class ProductsPageTest : BaseTest
     {
-
         private ProductsPage _productPage;
 
         [SetUp]
@@ -17,39 +16,43 @@ namespace Automationpractice.Tests
             _productPage = new ProductsPage(Driver);
         }
 
-
         [Test]
         public void SortByPriceHighestFirst()
         {
             _productPage.SortBy.SendKeys("Price: Highest first");
-            Assert.IsTrue(_productPage.IsHighToLow(_productPage.TakeEveryProductsPrices()));
-
+            _productPage.AssertSortByPriceHighestFirst();            
         }
 
         [Test]
-        public void AddProductToCart()
+        [TestCase(2)]
+        public void AddProductToCart(int productNumber)
         {
-            _productPage.AddToCart(2);
 
-            string actualResult = _productPage.CartQuantity.Text;
-            Assert.AreEqual("1", actualResult);
+            string beforeProductsInCart = _productPage.CartQuantity.Text;
+
+            _productPage.AddToCart(productNumber);
+
+            _productPage.AssertThatProductIsAddToCart(beforeProductsInCart);
         }
 
         [Test]
-        public void AddToCompare()
+        [TestCase(2)]
+        public void AddToCompare(int productNumber)
         {
-            _productPage.AddToCompare(1);
+            string beforeProductsInCart = _productPage.CompareItemsNumber.Text;
 
-            Assert.AreEqual("1", _productPage.CompareItemsNumber.Text);
+            _productPage.AddToCompare(productNumber);
+
+            _productPage.AssertThatProductIsAddToCompare(beforeProductsInCart);
         }
 
-
         [Test]
-        [TestCase(1)]
+        [TestCase(3)]
         public void NavigateToQickView(int productNumber)
         {
             _productPage.OpenProductQuickView(productNumber);
-            Assert.That(_productPage.IsQuickViewOpen);
+
+            _productPage.AssertQuickViewIsOpen();
         }
 
         [TearDown]

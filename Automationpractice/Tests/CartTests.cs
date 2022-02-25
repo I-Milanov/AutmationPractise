@@ -1,6 +1,8 @@
-﻿using Automationpractice.Pages.CartPage;
+﻿using Automationpractice.Models;
+using Automationpractice.Pages.CartPage;
 using Automationpractice.Pages.QuickView;
 using NUnit.Framework;
+using OpenQA.Selenium.Support.UI;
 
 namespace Automationpractice.Tests
 {
@@ -10,6 +12,7 @@ namespace Automationpractice.Tests
 
         private QuickView _quickView;
         private CartPage _cartPage;
+        private Product product;
         [SetUp]
         public void Setup()
         {
@@ -17,6 +20,8 @@ namespace Automationpractice.Tests
             Driver.Navigate().GoToUrl("http://automationpractice.com/index.php?id_category=8&controller=category");
             _quickView = new QuickView(Driver);
             _cartPage = new CartPage(Driver);
+            product = new Product();
+
         }
 
         [Test]
@@ -26,25 +31,25 @@ namespace Automationpractice.Tests
             _quickView.OpenProductQuickView(productNumber);
             _quickView.QuantityField.Clear();
             _quickView.QuantityField.SendKeys(quant.ToString());
-            _quickView.AddToCartQuickView.Click();
-            Driver.SwitchTo().DefaultContent();
-            _quickView.ProceedToCheckout.Click();
-            string expectedResult = quant.ToString();
-            string actualResult = _cartPage.TakeQantityFromProductInCart(1);
-            Assert.AreEqual(expectedResult, actualResult);
+
+
+            _quickView.CreateProduct(product,"");
+            _quickView.GoToCart();
+
+            _cartPage.AssertProductInCartIsCorrect(1, product);
         }
 
         [Test]
-        [TestCase(2, 'L')]
-        public void ChangeSizeFromQuickViewAndAddToCartAssert(int productNumber, char size)
+        [TestCase(2, "L")]
+        public void ChangeSizeFromQuickViewAndAddToCartAssert(int productNumber, string size)
         {
             _quickView.OpenProductQuickView(productNumber);
-            _quickView.ProductSize.SendKeys(size.ToString());
-            _quickView.AddToCartQuickView.Click();
-            Driver.SwitchTo().DefaultContent();
-            _quickView.ProceedToCheckout.Click();
-            string actualResult = _cartPage.TakeSizeFromProductInCart(1);
-            Assert.AreEqual(size.ToString(), actualResult);
+            _quickView.SelectProductSize(size);
+
+            _quickView.CreateProduct(product,"");
+            _quickView.GoToCart();
+
+            _cartPage.AssertProductInCartIsCorrect(1, product);
         }
 
         [Test]
@@ -52,46 +57,31 @@ namespace Automationpractice.Tests
         public void ChangeColorFromQuickViewAndAddToCartAssert(int productNumber, int colorNumber)
         {
             _quickView.OpenProductQuickView(productNumber);
-            string expectedResult = _quickView.SelectColorAndReturnItsName(colorNumber);
-            _quickView.AddToCartQuickView.Click();
-            Driver.SwitchTo().DefaultContent();
-            _quickView.ProceedToCheckout.Click();
-            string actualColor= _cartPage.TakeColorFromProductInCart(1);
-            Assert.AreEqual(expectedResult, actualColor);
+            _quickView.SelectColorAndReturnItsName(colorNumber);
+
+            _quickView.CreateProduct(product, "");
+            _quickView.GoToCart();
+
+            _cartPage.AssertProductInCartIsCorrect(1, product);
         }
 
         [Test]
-        [TestCase(3, 3, 'M', 2)]
-        public void ChangeEverythingFromQuickViewAddToCartAssert(int productNumber, int quant, char size, int colorNumber)
+        [TestCase(3, 3, "M", 2)]
+        public void ChangeEverythingFromQuickViewAddToCartAssert(int productNumber, int quant, string size, int colorNumber)
         {
-            string expectedName = _quickView.TakeNameAsString(productNumber);
-            _quickView.OpenProductQuickView(productNumber);           
+            _quickView.OpenProductQuickView(productNumber);             
             _quickView.QuantityField.Clear();
             _quickView.QuantityField.SendKeys(quant.ToString());
-            _quickView.ProductSize.SendKeys(size.ToString());
-            string expectedColor = _quickView.SelectColorAndReturnItsName(colorNumber);       
-            _quickView.AddToCartQuickView.Click();
-            Driver.SwitchTo().DefaultContent();
-            _quickView.ProceedToCheckout.Click();
+            _quickView.SelectProductSize(size);  
+            _quickView.SelectColorAndReturnItsName(colorNumber);
+            
+            _quickView.CreateProduct(product, size);
+            _quickView.GoToCart();
 
-            //Name
-            string actualName = _cartPage.TakeNameFromProductInCart(1);
-            Assert.AreEqual(expectedName, actualName);
-
-            //Qantity
-            string actualQuant = _cartPage.TakeQantityFromProductInCart(1);
-            Assert.AreEqual(quant.ToString(), actualQuant);
-
-            //Size
-            string actualSize = _cartPage.TakeSizeFromProductInCart(1);
-            Assert.AreEqual(size.ToString(), actualSize);
-
-            //Color
-            string actualColor = _cartPage.TakeColorFromProductInCart(1);
-            Assert.AreEqual(expectedColor, actualColor);
+            _cartPage.AssertProductInCartIsCorrect(1, product);
         }
 
-
+   
         [TearDown]
         public void TearDown()
         {

@@ -6,6 +6,7 @@ namespace Automationpractice.Pages.ProductsPage
 {
     public partial class ProductsPage : BasePage
     {
+
         public float[] TakeEveryProductsPrices()
         {
             var prices = Driver.FindElements(By.CssSelector(".product_list .right-block .price"));
@@ -44,9 +45,9 @@ namespace Automationpractice.Pages.ProductsPage
         }
         public void AddToCart(int itemNumber)
         {
-            var productToHover = Driver.FindElement(By.CssSelector($".right-block:nth-child({itemNumber})"));
+            var productToHover = Driver.FindElement(By.CssSelector($".product_list>li:nth-child({itemNumber})"));
             HoverOverAnElement(productToHover);
-            var addToCartButton = Driver.FindElement(By.CssSelector($".right-block:nth-child({itemNumber}) .button"));
+            var addToCartButton = Driver.FindElement(By.CssSelector($".product_list>li:nth-child({itemNumber}) .button"));
             addToCartButton.Click();
             var closebutton = Driver.FindElement(By.CssSelector(".cross"));
             closebutton.Click();
@@ -97,8 +98,15 @@ namespace Automationpractice.Pages.ProductsPage
             string name = Driver.FindElement(By.CssSelector($".product_list>li:nth-child({productNum}) .right-block .product-name")).Text;
             return name;
         }
+        protected string IfStringIsEmptyReplaceWith0(string input)
+        {
+            if (input == "")
+            {
+                return input = "0";
+            }
+            return input;
+        }
 
- 
     }
 }
 

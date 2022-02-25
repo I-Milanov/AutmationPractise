@@ -19,23 +19,16 @@ namespace Automationpractice.Tests
             _quickViewPage = new QuickView(Driver);
         }
 
-        //[Test]
-        //[TestCase(1)]
-        //public void TweetButtonAssert(int productNumber)
-        //{
-        //    _quickViewPage.OpenProductQuickView(productNumber);
-        //    _quickViewPage.TweeterButton.Click();
-        //}
-
         [Test]
-        [TestCase(1)]
+        [TestCase(2)]
         public void QuickViewPriceAssert(int productNumber)
         {
             _productPreview = new ProductPreview();
             _productPreview.Price = _quickViewPage.TakeProductPriceAsString(productNumber);
+
             _quickViewPage.OpenProductQuickView(productNumber);
-            string quickViewPrice = _quickViewPage.ProductPrice.Text;
-            Assert.That(_productPreview.Price == quickViewPrice);
+
+            _quickViewPage.AssertQuickViewPrice(_quickViewPage.ProductPrice.Text);
         }
 
         [Test]
@@ -44,9 +37,10 @@ namespace Automationpractice.Tests
         {
             _productPreview = new ProductPreview();
             _productPreview.Name = _quickViewPage.TakeNameAsString(productNumber);
+
             _quickViewPage.OpenProductQuickView(productNumber);
-            string quickViewName = _quickViewPage.ProductName.Text;
-            Assert.That(_productPreview.Name == quickViewName);
+
+            _quickViewPage.AssertQuickViewName(_quickViewPage.ProductName.Text);
         }
 
         [TearDown]

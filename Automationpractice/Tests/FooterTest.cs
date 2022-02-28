@@ -1,40 +1,22 @@
-﻿using Automationpractice.Pages;
-using Automationpractice.Tests;
-using NUnit.Framework;
-
-namespace Automationpractice
-
+﻿namespace Automationpractice
 {
+    using Automationpractice.Pages;
+    using Automationpractice.Tests;
+    using NUnit.Framework;
+
     [TestFixture]
     public class FooterTest : BaseTest
     {
-        private BasePage _basePage;
+        private BasePage basePage;
 
         [SetUp]
         public void Setup()
         {
             Initialize();
-   
+
             Driver.Navigate().GoToUrl("http://automationpractice.com");
-            _basePage = new BasePage(Driver);
+            basePage = new BasePage(Driver);
         }
-
-
-        [Test]
-        public void FacebookLink()
-        {//To Do
-            //string actualResult;
-            
-            //_basePage.ScrollTo(_basePage.FollowUsFacebook).Click();
-            //Driver.SwitchTo().ActiveElement();
-            //actualResult = Driver.Title;
-
-            //Assert.AreEqual("Selenium Framework | Facebook", actualResult);
-        }
-
-        //To Do
-
-
 
         [TearDown]
         public void TearDown()

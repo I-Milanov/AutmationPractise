@@ -1,29 +1,30 @@
-﻿using OpenQA.Selenium;
-using Automationpractice.Models.ProductPreview;
-using System.Collections.Generic;
-
-namespace Automationpractice.Pages.ComparsionPage
+﻿namespace Automationpractice.Pages.ComparsionPage
 {
+    using System.Collections.Generic;
+    using Automationpractice.Models.ProductPreview;
+    using OpenQA.Selenium;
+
     public partial class ComparsionPage : ProductsPage.ProductsPage
     {
-
-        public bool ComparsionScreenVerification(int[] arrayOfProducts)
+        public bool ComparsionScreenVerification(int[] productIds)
         {
+            int counter = productIds.Length;
+            ProductPreview[] productsFromProdutPage = new ProductPreview[productIds.Length];
 
-            int counter = arrayOfProducts.Length;
-            ProductPreview[] productsFromProdutPage = new ProductPreview[arrayOfProducts.Length];
-
-            for (int i = 0; i < arrayOfProducts.Length; i++)
+            for (int i = 0; i < productIds.Length; i++)
             {
-                ProductPreview tempProduct = new ProductPreview();
-                tempProduct.Name = TakeNameAsString(arrayOfProducts[i]);
-                tempProduct.Price = TakeProductPriceAsString(arrayOfProducts[i]);
+                ProductPreview tempProduct = new ()
+                {
+                    Name = TakeNameAsString(productIds[i]),
+                    Price = TakeProductPriceAsString(productIds[i]),
+                };
                 productsFromProdutPage[i] = tempProduct;
-                AddToCompare(arrayOfProducts[i]);
+                AddToCompare(productIds[i]);
             }
+
             CompareButtonTop.Click();
 
-            if (!ComprasionPageProductsCountVerify(arrayOfProducts.Length))
+            if (!ComprasionPageProductsCountVerify(productIds.Length))
             {
                 return false;
             }
@@ -33,9 +34,11 @@ namespace Automationpractice.Pages.ComparsionPage
 
             for (int i = 0; i < productsToCompare.Count; i++)
             {
-                ProductPreview tempProduct = new ProductPreview();
-                tempProduct.Name = TakeProductNameFromComprassionScreen(i);
-                tempProduct.Price = TakeProductPriceFromComprassionScreen(i);
+                ProductPreview tempProduct = new ()
+                {
+                    Name = TakeProductNameFromComprassionScreen(i),
+                    Price = TakeProductPriceFromComprassionScreen(i),
+                };
                 productsFromComparePage[i] = tempProduct;
             }
 
@@ -43,7 +46,7 @@ namespace Automationpractice.Pages.ComparsionPage
             {
                 for (int j = 0; j < productsFromComparePage.Length; j++)
                 {
-                    if (productsFromProdutPage[i].Name== productsFromComparePage[j].Name&&
+                    if (productsFromProdutPage[i].Name == productsFromComparePage[j].Name &&
                         productsFromProdutPage[i].Price == productsFromComparePage[j].Price)
                     {
                         counter--;
@@ -51,23 +54,12 @@ namespace Automationpractice.Pages.ComparsionPage
                 }
             }
 
-
-            return counter == 0 ? true : false;
+            return counter == 0;
         }
+
         public bool ComprasionPageProductsCountVerify(int productsThatMustBe)
         {
-            return ProductsToCompare.Count == productsThatMustBe ? true : false;
+            return ProductsToCompare.Count == productsThatMustBe;
         }
-        public string TakeProductNameFromComprassionScreen(int productNumber)
-        {
-            return Driver.FindElement(By.CssSelector($"#product_comparison .product-block:nth-of-type({productNumber + 2}) .product-name")).Text;
-        }
-        public string TakeProductPriceFromComprassionScreen(int productNumber)
-        {
-            return Driver.FindElement(By.CssSelector($"#product_comparison .product-block:nth-of-type({productNumber + 2}) .product-price")).Text;
-        }
-
-
-
     }
 }

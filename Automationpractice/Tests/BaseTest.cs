@@ -1,20 +1,18 @@
-﻿using NUnit.Framework;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Interactions;
-using System.IO;
-using System.Reflection;
-
-namespace Automationpractice.Tests
+﻿namespace Automationpractice.Tests
 {
+    using System.IO;
+    using System.Reflection;
+    using NUnit.Framework;
+    using OpenQA.Selenium;
+    using OpenQA.Selenium.Chrome;
+    using OpenQA.Selenium.Interactions;
+
     [TestFixture]
     public class BaseTest
     {
         protected IWebDriver Driver { get; set; }
 
         protected Actions Builder { get; set; }
-
-
 
         public void Initialize()
         {

@@ -1,13 +1,12 @@
-﻿using NUnit.Framework;
-
-namespace Automationpractice.Pages.ComparsionPage
+﻿namespace Automationpractice.Pages.ComparsionPage
 {
+    using NUnit.Framework;
+
     public partial class ComparsionPage : ProductsPage.ProductsPage
     {
-        public void AssertProductsToCompare(int[] arrayOfProducts)
+        public void AssertProductsToCompare(int[] productIds)
         {
-            Assert.That(ComparsionScreenVerification(arrayOfProducts));
+            Assert.That(ComparsionScreenVerification(productIds));
         }
-
     }
 }
